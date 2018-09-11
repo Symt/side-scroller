@@ -12,7 +12,7 @@ public class Block extends GameObject {
 	public boolean colliding = false;
 	public int weight;
 	
-	public Block(int x, int y, ID id, int width, int height, int r, int g, int b) {
+	public Block(int x, int y, ID id, int width, int height, int r, int g, int b, Main main) {
 		super(x, y, id);
 		
 		this.width = width;
@@ -20,7 +20,7 @@ public class Block extends GameObject {
 		this.r = r;
 		this.g = g;
 		this.b = b;
-		velX = Main.speed;
+		velX = main.speed;
 	}
 
 	public void tick() {

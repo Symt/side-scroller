@@ -31,5 +31,8 @@ public class Handler {
 	public void addObject(GameObject obj, int i) {
 		object.add(i, obj);
 	}
+	public void reset() {
+		object = new LinkedList<GameObject>();
+	}
 			
 }

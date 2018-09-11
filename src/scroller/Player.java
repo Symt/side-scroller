@@ -13,17 +13,19 @@ public class Player extends GameObject {
 	private boolean colliding;
 	private int clampValue;
 	private boolean maybeLeft = true;
-	public static int jumpsLeft = 5;
-	public static int originalJumps = jumpsLeft;
+	public int jumpsLeft = 5;
+	public int originalJumps = jumpsLeft;
 	public int totalJumps = 0;
+	private Main main;
 
-	public Player(int x, int y, ID id, Handler handler) {
+	public Player(int x, int y, ID id, Handler handler, Main main) {
 		super(x, y, id);
 
 		this.handler = handler;
 		height = 28;
 		width = 28;
 		clampValue = Main.WIDTH - 56;
+		this.main = main;
 	}
 
 	public void tick() {
@@ -102,7 +104,7 @@ public class Player extends GameObject {
 					}
 					if (border[2] >= objectBorder[0] && left) {
 						if (maybeLeft) {
-							Main.speed = 0;
+							main.speed = 0;
 							int margin = border[2] - objectBorder[0];
 							if (margin > 0) {
 								GameObject temp;
@@ -118,12 +120,12 @@ public class Player extends GameObject {
 						}
 					} else if (border[3] >= objectBorder[1] && top) {
 						jumpsLeft = originalJumps;
-						Main.speed = Main.ORIGINALSPEED;
+						main.speed = main.specialSpeed;
 						clampValue = obj.y;
 						y = obj.y - height;
 						velY = 0;
 					} else if (border[1] >= objectBorder[3] && bottom) {
-						Main.speed = Main.ORIGINALSPEED;
+						main.speed = main.specialSpeed;
 						clampValue = Main.HEIGHT - 56;
 						velY = 0;
 						falling = true;
@@ -150,7 +152,7 @@ public class Player extends GameObject {
 			}
 		}
 		if (!top && !bottom && !left && !isColliding()) {
-			Main.speed = Main.ORIGINALSPEED;
+			main.speed = main.specialSpeed;
 		}
 	}
 
