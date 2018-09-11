@@ -31,6 +31,7 @@ public class Menu {
 		g2d.draw(quitButton);
 		String scr = "Score: " + score;
 		g2d.drawString(scr, Main.WIDTH/2-g.getFontMetrics().stringWidth(scr)/2, Main.HEIGHT/2-50);		
+		
 		g2d.dispose();
 		g.dispose();
 	}

@@ -50,7 +50,8 @@ public class Trail extends GameObject {
 		
 		g2d.setComposite(makeTransparent(1));
 		
-		
+		g2d.dispose();
+		g.dispose();
 		
 	}
 	

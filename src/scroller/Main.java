@@ -19,7 +19,12 @@ public class Main extends Canvas implements Runnable {
 	private Player player;
 	private Menu menu;
 	private KeyInput keyinput;
-
+	private long lastTime;
+	private double ns;
+	private double delta;
+	private long timer;
+	private long now;
+	
 	public static boolean running = true;
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = WIDTH / 12 * 9;
@@ -74,12 +79,10 @@ public class Main extends Canvas implements Runnable {
 
 	public void run() {
 		this.requestFocus();
-		long lastTime = System.nanoTime();
-		double amountOfTicks = (double) FRAMERATE;
-		double ns = 1000000000 / amountOfTicks;
-		double delta = 0;
-		long timer = System.currentTimeMillis();
-		long now;
+		lastTime = System.nanoTime();
+		ns = 1000000000 / FRAMERATE;
+		delta = 0;
+		timer = System.currentTimeMillis();
 
 		while (running) {
 			now = System.nanoTime();
@@ -156,6 +159,7 @@ public class Main extends Canvas implements Runnable {
 		} else if (state == STATE.MENU) {
 			menu.render(g);
 		}
+		
 		g.dispose();
 		bs.show();
 	}

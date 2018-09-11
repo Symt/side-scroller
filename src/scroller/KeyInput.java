@@ -32,12 +32,13 @@ public class KeyInput extends KeyAdapter {
 							keyDown = true;
 							player.jumpsLeft--;
 							if (counter >= 10) {
-								counter = 0;
+								counter =  0;
 								main.specialSpeed++;
 								main.speed = main.specialSpeed;
 							}
 						} else {
 							if (tempObject.y == Main.HEIGHT - 56) {
+								keyDown = false;
 								//Main.running = false;
 								main.state = Main.STATE.MENU;
 								menu.score = player.totalJumps * main.objectsRemoved;

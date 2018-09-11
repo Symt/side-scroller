@@ -25,14 +25,17 @@ public class MouseInput implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
-		if (mx >= Main.WIDTH / 2 - 110 && mx <= Main.WIDTH / 2 - 10 && my >= Main.HEIGHT / 2
-				&& my <= Main.HEIGHT / 2 + 50) {
-			// Play Button
-			main.state = Main.STATE.GAME;
-		} else if (mx >= Main.WIDTH / 2 + 10 && mx <= Main.WIDTH / 2 + 110 && my >= Main.HEIGHT / 2
-				&& my <= Main.HEIGHT / 2 + 50) {
-			// Quit Button
-			System.exit(0);
+		if (main.state == Main.STATE.MENU) {
+			if (mx >= Main.WIDTH / 2 - 110 && mx <= Main.WIDTH / 2 - 10 && my >= Main.HEIGHT / 2
+					&& my <= Main.HEIGHT / 2 + 50) {
+				// Play Button
+				main.resetVars();
+				main.state = Main.STATE.GAME;
+			} else if (mx >= Main.WIDTH / 2 + 10 && mx <= Main.WIDTH / 2 + 110 && my >= Main.HEIGHT / 2
+					&& my <= Main.HEIGHT / 2 + 50) {
+				// Quit Button
+				System.exit(0);
+			}
 		}
 	}
 

@@ -17,6 +17,8 @@ public class Player extends GameObject {
 	public int originalJumps = jumpsLeft;
 	public int totalJumps = 0;
 	private Main main;
+	private GameObject obj;
+	private GameObject temp;
 
 	public Player(int x, int y, ID id, Handler handler, Main main) {
 		super(x, y, id);
@@ -72,7 +74,7 @@ public class Player extends GameObject {
 
 	public void collision() {
 		for (int i = 0; i < handler.object.size(); i++) {
-			GameObject obj = handler.object.get(i);
+			obj = handler.object.get(i);
 			if (obj.getID() == ID.Block) {
 				if (getBounds().intersects(obj.getBounds())) {
 					obj.colliding = true;
@@ -107,7 +109,6 @@ public class Player extends GameObject {
 							main.speed = 0;
 							int margin = border[2] - objectBorder[0];
 							if (margin > 0) {
-								GameObject temp;
 								for (int k = 0; k < handler.object.size(); k++) {
 									temp = handler.object.get(k);
 
@@ -167,10 +168,10 @@ public class Player extends GameObject {
 	}
 
 	public void render(Graphics g) {
-		// Graphics2D g2d = (Graphics2D) g;
 
 		g.setColor(Color.blue);
 		g.fillRect(x, y, 28, 28);
+		
 	}
 
 	public boolean isColliding() {
