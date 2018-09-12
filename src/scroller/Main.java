@@ -11,7 +11,6 @@ public class Main extends Canvas implements Runnable {
 	private static final long serialVersionUID = -6159849249299867316L;
 
 	private Thread thread;
-	private final int FRAMERATE = 60;
 	private Handler handler;
 	private Window frame;
 	private int boxHeight;
@@ -22,7 +21,6 @@ public class Main extends Canvas implements Runnable {
 	private long lastTime;
 	private double ns;
 	private double delta;
-	private long timer;
 	private long now;
 	
 	public static boolean running = true;
@@ -34,11 +32,11 @@ public class Main extends Canvas implements Runnable {
 	public int ORIGINALSPEED = speed;
 	public int specialSpeed = ORIGINALSPEED;
 	public int objectsRemoved = 0;
+	
 	public static enum STATE {
 		MENU,
 		GAME
 	}
-	
 	public STATE state = STATE.MENU;
 
 	public Main() {
@@ -78,11 +76,10 @@ public class Main extends Canvas implements Runnable {
 	}
 
 	public void run() {
-		this.requestFocus();
+		this.requestFocusInWindow();
 		lastTime = System.nanoTime();
-		ns = 1000000000 / FRAMERATE;
+		ns = 1000000000 / 60;
 		delta = 0;
-		timer = System.currentTimeMillis();
 
 		while (running) {
 			now = System.nanoTime();
@@ -96,10 +93,6 @@ public class Main extends Canvas implements Runnable {
 
 			if (running) {
 				render();
-			}
-
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
 			}
 		}
 		stop();
@@ -189,6 +182,7 @@ public class Main extends Canvas implements Runnable {
 		handler.reset();
 		cloudsAndBoxes();
 		player.jumpsLeft = player.originalJumps;
+		player.totalJumps = 0;
 	}
 	
 	public void cloudsAndBoxes() {
